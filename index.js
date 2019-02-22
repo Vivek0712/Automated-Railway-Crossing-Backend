@@ -7,13 +7,6 @@ const app = express()
 var toggle = true
 
 app.get('/toggleLED', (req, res) => {
-  // serialPort.flush((error) => {
-  //   if(!error){
-      
-  //   } else {
-  //     console.log('An error occured while transmitting data')
-  //   }
-  // });
   if(toggle){
     serialPort.sendMessage('on')
   } else {
