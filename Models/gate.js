@@ -4,7 +4,10 @@ const Schema = mongoose.Schema
 const gateSchema = Schema({
     gsmPhoneNumber : Number,
     gateNumber : String,
-    gateState : Number
+    gateOpened : Boolean,
+    gateLocationLatitude: Number,
+    gateLocationLongitude: Number,
+    lastBeacon: String
 })
 
 module.exports = mongoose.model('Gate', gateSchema)

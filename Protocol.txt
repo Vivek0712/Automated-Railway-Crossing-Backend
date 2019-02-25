@@ -1,0 +1,18 @@
+Types of Messages : 
+
+    1) Beacon
+        1.1) From TrainSensor to Server
+        1.2) From GateKit to Server
+    2) Gate Close
+    3) Gate Open
+    4) Sense Train
+
+Bit Description :
+
+7    |   6  |    5  |    4  |    3  |    2     |    1    |  0
+
+
+Bit 0 - To the Server || From the Server
+Bit 1 - TrainSensor || GateKit
+Bit 2 - Open | Close ( if BIT 1 == 1 && BIT 0 == 1)
+Bit 2 - Dont Care ( if BIT1 = 0)
