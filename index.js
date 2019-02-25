@@ -7,6 +7,8 @@
 // Import the required Modules
 const express = require('express')
 const bodyparser = require('body-parser')
+const mongoose = require('mongoose')
+const config = require('./Modules/config')
 // END Import
 
 // Constants for the project
@@ -17,12 +19,31 @@ const app = express()
 // Body Parser Middleware
 app.use(bodyparser.json())
 
+// Routes Import
+console.log('\n******************* Importing Required Routes *******************\n')
+const gateRoute = require('./Routes/gate')
+const trainDetectorRoute = require('./Routes/trainDetector')
+console.log('\n******************* Finished Importing Routes *******************\n')
+// END Import
+
+// Apply Routes to Express.js App
+app.use('/gate', gateRoute)
+app.use('/trainDetector', trainDetectorRoute)
+
 // Hello World Method
-app.get('/helloWorld',(req, res)=>{
+app.get('/helloWorld', (req, res) => {
+  serialPort.sendMessage('on');
   res.send('Hello World!!!')
 })
 
-// Create a Web server that listens of PORT
-app.listen(PORT, () => {
-  console.log('Server Started on Port ' + PORT)
+// Attempt Connection to Database
+mongoose.connect(config.database.connectionString, { useNewUrlParser: true }, (connectionError) => {
+  // Create a Web server that listens of PORT
+  if (connectionError) {
+    console.log('Cannot connect to Database : ' + connectionError)
+  } else {
+    app.listen(PORT, () => {
+      console.log('Server Successfully Started on Port ' + PORT + '\nDatabase Location : ' + config.database.connectionString)
+    })
+  }
 })

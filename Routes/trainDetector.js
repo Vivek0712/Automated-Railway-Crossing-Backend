@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const serialPort = require('../Modules/serialPort')
 
-console.log('Loaded Route : Gate')
+console.log('Loaded Route : TrainDetector')
 
 router.get('/testLEDOn',(req, res)=>{
     serialPort.sendMessage('on')

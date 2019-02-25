@@ -6,3 +6,5 @@ const trainSensorSchema = Schema({
     locationLongitude: Number,
     locationLatitude: Number
 })
+
+module.exports = mongoose.model('TrainSensor', trainSensorSchema)
