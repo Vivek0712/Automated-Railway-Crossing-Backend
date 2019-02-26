@@ -6,4 +6,4 @@ const stationTrainSensorMap = Schema({
     trainSensorId: Schema.Types.ObjectId
 })
 
-module.exports = mongoose.model('StationTrainSensorMap', stationTrainSensorMap)
+module.exports = mongoose.model('StationSensorMap', stationTrainSensorMap)

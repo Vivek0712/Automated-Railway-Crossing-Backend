@@ -5,7 +5,8 @@ const trainSensorSchema = Schema({
     gsmPhoneNumber : Number,
     locationLongitude: Number,
     locationLatitude: Number,
-    lastBeacon: String
+    lastBeacon: String,
+    stationId: String
 })
 
 module.exports = mongoose.model('TrainSensor', trainSensorSchema)

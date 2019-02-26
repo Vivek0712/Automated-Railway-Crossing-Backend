@@ -2,10 +2,10 @@ const express = require('express')
 const router = express.Router()
 const trainSensor = require('../Models/trainSensor')
 const station = require('../Models/station')
-const stationTrainSensorMap = require('../Models/stationTrainSensorMap')
+const stationTrainSensorMap = require('../Models/stationTrainSensorMap.js')
 const serialPort = require('../Modules/serialPort')
 
-console.log('Loaded Route : TrainDetector')
+console.log('Loaded Route : TrainSensor')
 
 router.post('/create', (req, res) => {
     let newTrainSensor = new trainSensor({

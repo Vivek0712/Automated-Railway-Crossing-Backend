@@ -22,17 +22,30 @@ app.use(bodyparser.json())
 // Routes Import
 console.log('\n******************* Importing Required Routes *******************\n')
 const gateRoute = require('./Routes/gate')
-const trainDetectorRoute = require('./Routes/trainDetector')
+const gateKeeperMapRoute = require('./Routes/gateKeeperMap')
+const gateKitMapRoute = require('./Routes/gateKitMap')
+const roleRoute = require('./Routes/role')
+const roleMapRoute = require('./Routes/roleMap')
+const stationRoute = require('./Routes/station')
+const stationGateMapRoute = require('./Routes/stationGatemap')
+const stationTrainSensorMapRoute = require('./Routes/stationTrainSensorMap')
+const trainSensorRoute = require('./Routes/trainSensor')
 console.log('\n******************* Finished Importing Routes *******************\n')
 // END Import
 
 // Apply Routes to Express.js App
 app.use('/gate', gateRoute)
-app.use('/trainDetector', trainDetectorRoute)
+app.use('/gateKeeperMap', gateKeeperMapRoute)
+app.use('/gateKitMap', gateKitMapRoute)
+app.use('/role', roleRoute)
+app.use('/roleMap', roleMapRoute)
+app.use('/station', stationRoute)
+app.use('/stationGateMap', stationGateMapRoute)
+app.use('/stationTrainSensorMap', stationTrainSensorMapRoute)
+app.use('/trainSensor', trainSensorRoute)
 
 // Hello World Method
 app.get('/helloWorld', (req, res) => {
-  serialPort.sendMessage('on');
   res.send('Hello World!!!')
 })
 
