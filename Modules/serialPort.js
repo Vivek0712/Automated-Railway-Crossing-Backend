@@ -1,11 +1,11 @@
 
 const SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
-const serialPortIdentifier = '/dev/ttyACM0'
+const serialPortIdentifier = '/dev/ttyACM1'
 
-const serialPort = new SerialPort(serialPortIdentifier, { baudRate: 115200 });
+const serialPort = new SerialPort(serialPortIdentifier, { baudRate: 19200 });
 
-const dataParser = serialPort.pipe(new Readline({ delimiter: '\n' }));
+const dataParser = serialPort.pipe(new Readline({ delimiter: '\r\n' }));
 
 serialPort.on("open", () => {
     console.log('\nSerial Port ' + serialPortIdentifier + ' now OPEN\n');
