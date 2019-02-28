@@ -10,6 +10,7 @@ const bodyparser = require('body-parser')
 const mongoose = require('mongoose')
 const config = require('./Modules/config')
 const serialPort = require('./Modules/serialPort')
+const cors = require('cors')
 // END Import
 
 // Constants for the project
@@ -20,6 +21,9 @@ const app = express()
 // Body Parser Middleware
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended: true }));
+
+// CORS Middleware
+app.use(cors({origin:'http://localhost:4200'}))
 
 
 // Routes Import
