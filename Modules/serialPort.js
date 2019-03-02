@@ -1,7 +1,7 @@
 
 const SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
-const serialPortIdentifier = '/dev/ttyACM1'
+const serialPortIdentifier = '/dev/ttyACM0'
 
 const serialPort = new SerialPort(serialPortIdentifier, { baudRate: 19200 });
 
@@ -12,7 +12,12 @@ serialPort.on("open", () => {
 });
 
 dataParser.on('data', (data) => {
-    console.log("\nReceived : " + data+'\n')
+        var firstLine = data.split(",");
+        var phno = firstLine[2];
+        var msg = data.split("\n");
+        msg =msg[1];
+        var val = new Array(phno,msg);
+        return val;
 })
 
 serialPort.sendMessage = function (message) {
