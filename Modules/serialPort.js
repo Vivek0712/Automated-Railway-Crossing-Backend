@@ -50,7 +50,30 @@ function senseCommand(number, command) {
             })
             break;
         case config.messageCodes.toServerTrainDetectedNonDirectionalised:
-            
+            console.log('Message Code : toServerTrainDetectedNonDirectionalised')
+            trainSensor.find({ gsmPhoneNumber: number }).exec((trainSensorFindError, trainSensorFindDocs) => {
+                if (trainSensorFindError) {
+                    console.log('Error : ' + trainSensorFindError)
+                } else {
+                    gateKitMap.find({ trainSensorId: trainSensorFindDocs[0]._id }).populate('trainSensorId').populate('gateKitId').exec((gateKitMapFindError, gateKitMapFindDocs) => {
+                        if (gateKitMapFindError) {
+                            console.log('Error : ' + gateKitMapFindError)
+                        } else {
+                            gateKitMapFindDocs = gateKitMapFindDocs.filter((doc)=>{
+                                return !doc.trainSensorId._id == trainSensorFindDocs[0]._id
+                            })
+                            const gateKitNumber = gateKitMapFindDocs[0].gateId.gsmPhoneNumber
+                            if(gateKitMapFindDocs[0].trainSensorId.isSensed){
+                                // Train is leaving - Open the Gate
+                                serialPort.sendMessage(gateKitNumber+';'+config.messageCodes.fromServerGateOpen)
+                            } else {
+                                // Train is approaching - Close the Gate
+                                serialPort.sendMessage(gateKitNumber+';'+config.messageCodes.fromServerGateClose)
+                            }
+                        }
+                    })
+                }
+            })
             break;
         default:
             console.log('Number : ' + number + ', Command : ' + command + ' : Invalid Command Combination')
@@ -67,8 +90,8 @@ function parseSMS(recSMS) {
         var msg = recSMS.split("\n");
         msg = msg[2];
         var val = {
-            phoneNumber : phno,
-            command : msg
+            phoneNumber: phno,
+            command: msg
         };
         return {
             success: true,
