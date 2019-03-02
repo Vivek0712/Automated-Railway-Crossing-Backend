@@ -5,6 +5,7 @@ const trainSensorSchema = Schema({
     gsmPhoneNumber : Number,
     locationLongitude: Number,
     locationLatitude: Number,
+    isSensed: Boolean,
     lastBeacon: String,
     stationId: String
 })
