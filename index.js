@@ -28,8 +28,8 @@ app.use(cors({origin:'http://localhost:4200'}))
 
 // Routes Import
 console.log('\n******************* Importing Required Routes *******************\n')
-// const gateRoute = require('./Routes/gate')
-// const gateKeeperMapRoute = require('./Routes/gateKeeperMap')
+const gateRoute = require('./Routes/gate')
+const gateKeeperMapRoute = require('./Routes/gateKeeperMap')
 // const gateKitMapRoute = require('./Routes/gateKitMap')
 const roleRoute = require('./Routes/role')
 const roleMapRoute = require('./Routes/roleMap')
@@ -42,8 +42,8 @@ console.log('\n******************* Finished Importing Routes *******************
 // END Import
 
 // Apply Routes to Express.js App
-// app.use('/gate', gateRoute)
-// app.use('/gateKeeperMap', gateKeeperMapRoute)
+app.use('/gate', gateRoute)
+app.use('/gateKeeperMap', gateKeeperMapRoute)
 // app.use('/gateKitMap', gateKitMapRoute)
 app.use('/role', roleRoute)
 app.use('/roleMap', roleMapRoute)
